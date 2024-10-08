@@ -1,9 +1,11 @@
 package es.iescarrillo.android.ejemplointroduccion2.activities;
 
-import static es.iescarrillo.android.ejemplointroduccion2.database.Database.inicializeList;
+import static es.iescarrillo.android.ejemplointroduccion2.database.Database.initializeList;
 import static es.iescarrillo.android.ejemplointroduccion2.database.Database.personList;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.ListView;
 
 import androidx.activity.EdgeToEdge;
@@ -14,6 +16,7 @@ import androidx.core.view.WindowInsetsCompat;
 
 import es.iescarrillo.android.ejemplointroduccion2.R;
 import es.iescarrillo.android.ejemplointroduccion2.adapters.PersonAdapter;
+import es.iescarrillo.android.ejemplointroduccion2.models.Person;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -34,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
         lvPersons = findViewById(R.id.lvPersons);
 
         // Inicializo la lista estática
-        inicializeList();
+        initializeList();
 
         // Creo el adaptador (contexto, id, lista de personas)
         PersonAdapter adapter = new PersonAdapter(MainActivity.this, 0, personList);
@@ -42,5 +45,17 @@ public class MainActivity extends AppCompatActivity {
         // Asignar el adaptador al listView
         lvPersons.setAdapter(adapter);
 
+        lvPersons.setOnItemClickListener((parent, view, position, id) -> {
+            Person p = personList.get(position);
+
+            Log.i("person click", p.toString());
+
+            Intent detailIntent = new Intent(MainActivity.this, DetailActivity.class);
+
+            detailIntent.putExtra("person", p);
+
+            startActivity(detailIntent);
+
+        });
     }
 }

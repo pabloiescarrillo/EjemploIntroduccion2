@@ -9,7 +9,7 @@ public class Database {
 
     public static List<Person> personList;
 
-    public static void inicializeList(){
+    public static void initializeList(){
         personList = new ArrayList<>();
 
         Person p = new Person();
