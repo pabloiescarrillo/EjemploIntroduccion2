@@ -1,5 +1,7 @@
 package es.iescarrillo.android.ejemplointroduccion2.adapters;
 
+import static es.iescarrillo.android.ejemplointroduccion2.database.Database.personList;
+
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -53,4 +55,48 @@ public class PersonAdapter extends ArrayAdapter<Person> {
         // Devolvemos la vista ya modificada
         return convertView;
     }
+
+    // Método getDropDownView se ejecuta al pulsar sobre el spinner
+    // Método llamando a una vista propia => item_person.xml
+    @Override
+    public View getDropDownView(int position, View convertView, ViewGroup parent){
+
+        Person p = personList.get(position);
+
+        if(convertView == null){
+            convertView = LayoutInflater.from(getContext()).inflate(R.layout.drop_down_person, parent, false);
+        }
+
+        // Recogemos de la vista los componentes
+        TextView tvName = convertView.findViewById(R.id.tvNameSpinner);
+        TextView tvEmail = convertView.findViewById(R.id.tvEmailSpinner);
+
+        // Modificamos los atributos de los componentes
+        tvName.setText(p.getName() + " " + p.getSurname());
+        tvEmail.setText(p.getEmail());
+
+        // Devolvemos la vista ya modificada
+        return convertView;
+    }
+
+    /* Método getDropDownView llamando al xml por defecto de Android => android.R.layout.simple_spinner_dropdown_item
+    * @Override
+    public View getDropDownView(int position, View convertView, ViewGroup parent){
+
+        Person p = personList.get(position);
+
+        if(convertView == null){
+            convertView = LayoutInflater.from(getContext()).inflate(android.R.layout.simple_spinner_dropdown_item, parent, false);
+        }
+
+        // Recogemos de la vista los componentes
+        TextView tvName = convertView.findViewById(android.R.id.text1);
+
+        // Modificamos los atributos de los componentes
+        tvName.setText(p.getName() + " " + p.getSurname());
+
+        // Devolvemos la vista ya modificada
+        return convertView;
+    }
+    * */
 }

@@ -39,5 +39,17 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="TextView" />
+
+        <Spinner
+            android:id="@+id/spPersons"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"/>
+
+        <Button
+            android:id="@+id/btnSendPerson"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Send Person to Main Activity" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
